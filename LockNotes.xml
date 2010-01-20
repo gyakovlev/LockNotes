@@ -1,0 +1,15 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="LockNotes.lua"/>
+	<Frame name="LockNotesFrame" parent="UIParent" hidden="false">
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("VARIABLES_LOADED");
+			</OnLoad>
+			<OnEvent>
+				if (event == "VARIABLES_LOADED") then LockNotes_OnLoad(); end
+				LockNotes_OnEvent(event);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>
