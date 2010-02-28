@@ -56,7 +56,8 @@ end
 
 
 
---Shadow Trance or BackSlash
+--[[Awaits combat log to be fixed
+-- Shadow Trance or BackSlash
 if (arg2 == "SPELL_AURA_APPLIED") then
 	if bit.band(arg8, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then
 		if (arg9 == 17941) or (arg9 == 34936) then
@@ -77,14 +78,14 @@ if (arg2 == "SPELL_AURA_APPLIED") then
 		end
 	end
 end
-
+]]
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 
 ------------------------------------------------------------- Hostile Spells -------------------------------------------------------------
 if (arg2 == "SPELL_CAST_SUCCESS") then
 	if bit.band(arg5, COMBATLOG_OBJECT_REACTION_HOSTILE) > 0 then -- Makes sure it's an enemy player
-		if (arg9 == 31224) or (arg9 == 642) or (arg9 == 47891) or (arg9 == 47585) or (arg9 == 23920) or (arg9 == 48707) or (arg9 == 45438) or (arg9 == 49039) or (arg9 == 12292) or (arg9 == 18499) or (arg9 == 59672) or (arg9 == 31687) or (arg9 == 48066) or (arg9 == 34692) or (arg9 == 6346) then -- Make sure Shadow Ward and Nether prot use this same event?
+		if (arg9 == 31224) or (arg9 == 642) or (arg9 == 47891) or (arg9 == 47585) or (arg9 == 23920) or (arg9 == 48707) or (arg9 == 45438) or (arg9 == 49039) or (arg9 == 12292) or (arg9 == 18499) or (arg9 == 59672) or (arg9 == 31687) or (arg9 == 48066) or (arg9 == 34692) or (arg9 == 6346) or (arg9 == 19263) then -- Make sure Shadow Ward and Nether prot use this same event?
 			SpellName = arg10
 			ZoneTextString:SetText(""..SpellName.." up!");
 			ZoneTextFrame.startTime = GetTime()
