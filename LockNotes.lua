@@ -8,10 +8,10 @@ function LockNotes_OnEvent(event)
 
 
 ------------------------------------------------------------- Friendly Buffs -------------------------------------------------------------
---Hand of Protection or Hand Of Freedom
+--Hand of Protection or Hand Of Freedom or Hand of Salvation
 if (arg2 == "SPELL_CAST_SUCCESS") then
 	if bit.band(arg8, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then
-		if (arg9 == 10278) or (arg9 == 1044) then
+		if (arg9 == 10278) or (arg9 == 1044) or (arg9 == 1038) then
 			SpellName = arg10
 			ZoneTextString:SetText(""..SpellName.." up.");
 			ZoneTextFrame.startTime = GetTime()
@@ -56,7 +56,7 @@ end
 
 
 
---[[Awaits combat log to be fixed
+
 -- Shadow Trance or BackSlash
 if (arg2 == "SPELL_AURA_APPLIED") then
 	if bit.band(arg8, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then
@@ -78,7 +78,7 @@ if (arg2 == "SPELL_AURA_APPLIED") then
 		end
 	end
 end
-]]
+
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 
