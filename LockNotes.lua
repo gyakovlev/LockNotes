@@ -79,7 +79,23 @@ end
 ------------------------------------------------------------- Hostile Spells -------------------------------------------------------------
 if (eventType == "SPELL_CAST_SUCCESS") then
 	if band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) > 0 then -- Makes sure it's an enemy player
-		if (spellId == 31224) or (spellId == 642) or (spellId == 47891) or (spellId == 47585) or (spellId == 23920) or (spellId == 48707) or (spellId == 45438) or (spellId == 49039) or (spellId == 12292) or (spellId == 18499) or (spellId == 59672) or (spellId == 31687) or (spellId == 48066) or (spellId == 34692) or (spellId == 6346) or (spellId == 19263) then -- Make sure Shadow Ward and Nether prot use this same event?
+		if (spellId == 31224) --CloS
+		or (spellId == 642) --Bubble
+--		or (spellId == 47891)
+		or (spellId == 47585) --Dispersion
+		or (spellId == 23920) --Spell Reflection
+		or (spellId == 48707) --Anti-Magic Shell
+		or (spellId == 45438) --Ice Block
+		or (spellId == 49039) --Lichborne
+		or (spellId == 12292) --Death Wish
+		or (spellId == 18499) --Berserker Rage
+		or (spellId == 59672) --Metamorphosis
+		or (spellId == 31687) --Summon Water Elemental
+--		or (spellId == 48066)
+		or (spellId == 34692) --The Beast Within
+		or (spellId == 6346)  --Fear Ward
+		or (spellId == 19263) --Deterrence
+		then -- Make sure Shadow Ward and Nether prot use this same event?
 			SpellName = spellName
 			ZoneTextString:SetText(""..SpellName.." up!");
 			ZoneTextFrame.startTime = GetTime()
@@ -99,7 +115,24 @@ end
 
 if (eventType == "SPELL_AURA_REMOVED") then
 	if band(destFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) > 0 then
-		if (spellId == 31224) or (spellId == 642) or (spellId == 47891) or (spellId == 47585) or (spellId == 23920) or (spellId == 48707) or (spellId == 45438) or (spellId == 49039) or (spellId == 12292) or (spellId == 18499) or (spellId == 59672) or (spellId == 31687) or (spellId == 48066) or (spellId == 34692) or (spellId == 6346) then
+		if (spellId == 31224) --CloS
+		or (spellId == 642) --Bubble
+--		or (spellId == 47891)
+		or (spellId == 47585) --Dispersion
+		or (spellId == 23920) --Spell Reflection
+		or (spellId == 48707) --Anti-Magic Shell
+		or (spellId == 45438) --Ice Block
+		or (spellId == 49039) --Lichborne
+		or (spellId == 12292) --Death Wish
+		or (spellId == 18499) --Berserker Rage
+		or (spellId == 59672) --Metamorphosis
+		or (spellId == 31687) --Summon Water Elemental
+--		or (spellId == 48066)
+		or (spellId == 34692) --The Beast Within
+		or (spellId == 6346)  --Fear Ward
+		or (spellId == 19263) --Deterrence
+		then -- Make sure Shadow Ward and Nether prot use this same event?
+		then
 			SpellName = spellName
 			ZoneTextString:SetText(""..SpellName.." down.");
 			ZoneTextFrame.startTime = GetTime()
@@ -115,7 +148,8 @@ end
 
 if (eventType == "SPELL_AURA_REMOVED") then -- apply same filtering on reflecting for Shadow Ward, and for /deflect?
 	if band(destFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) > 0 then
-		if (spellId == 23920) then
+		if (spellId == 23920) -- Spell Reflect
+			then
 			if (not MySpellReflected) then
 				SpellName = spellName
 				ZoneTextString:SetText(""..SpellName.." down.");
@@ -137,7 +171,7 @@ end
 if (eventType == "SPELL_AURA_DISPELLED") or (event == "SPELL_AURA_STOLEN") then
 	if band(destFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then -- Makes sure it's my buff only
 		local arg12=select(12,...)
-		if (arg12 == 47893) or (arg12 == 47889) then
+		if (arg12 == 28176) or (arg12 == 687) then
 			SpellName = arg13
 			ZoneTextString:SetText(""..SpellName.." removed.");
 			ZoneTextFrame.startTime = GetTime()
