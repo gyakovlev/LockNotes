@@ -131,8 +131,7 @@ if (eventType == "SPELL_AURA_REMOVED") then
 		or (spellId == 34692) --The Beast Within
 		or (spellId == 6346)  --Fear Ward
 		or (spellId == 19263) --Deterrence
-		then -- Make sure Shadow Ward and Nether prot use this same event?
-		then
+		then -- Make sure Shadow Ward and Nether prot use this same event?	
 			SpellName = spellName
 			ZoneTextString:SetText(""..SpellName.." down.");
 			ZoneTextFrame.startTime = GetTime()
