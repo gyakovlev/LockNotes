@@ -1,18 +1,14 @@
-function LockNotes_OnLoad()
-	this:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
-	WarlockArmorActive = true;
-	MySpellReflected = false;
-end
+local band=bit.band
+local function LockNotes_OnEvent(self,event,...)
 
-function LockNotes_OnEvent(event)
-
+local timestamp, eventType, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, spellId, spellName = select(1,...)
 
 ------------------------------------------------------------- Friendly Buffs -------------------------------------------------------------
---Hand of Protection or Hand Of Freedom or Hand of Salvation
-if (arg2 == "SPELL_CAST_SUCCESS") then
-	if bit.band(arg8, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then
-		if (arg9 == 10278) or (arg9 == 1044) or (arg9 == 1038) then
-			SpellName = arg10
+--Hand of Protection or Hand Of Freedom or Hand of Salvation or Power Infusion
+if (eventType == "SPELL_CAST_SUCCESS") then
+	if band(destFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then
+		if (spellId == 1022) or (spellId == 1044) or (spellId == 1038) or (spellID == 10060) then
+			SpellName = spellName
 			ZoneTextString:SetText(""..SpellName.." up.");
 			ZoneTextFrame.startTime = GetTime()
 			ZoneTextFrame.fadeInTime = 0
@@ -26,25 +22,23 @@ if (arg2 == "SPELL_CAST_SUCCESS") then
 	end
 end
 
-
-
 --Eradication, Molten Core, Decimation
-if (arg2 == "SPELL_AURA_APPLIED") then
-	if bit.band(arg8, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then
-		if (arg9 == 64371) or (arg9 == 71165) or (arg9 == 63167) then
-			SpellName = arg10
+if (eventType == "SPELL_AURA_APPLIED") then
+	if band(destFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then
+		if (spellId == 64371) or (spellId == 71165) or (spellId == 63167) then
+			SpellName = spellName
 			ZoneTextString:SetText(""..SpellName.." up!");
 			ZoneTextFrame.startTime = GetTime()
 			ZoneTextFrame.fadeInTime = 0
 			ZoneTextFrame.holdTime = 2
 			ZoneTextFrame.fadeOutTime = 2
-				if (arg9 == 64371) then
+				if (spellId == 64371) then
 					ZoneTextString:SetTextColor(0, 1, 0);
 				end
-				if (arg9 == 71165) then
+				if (spellId == 71165) then
 					ZoneTextString:SetTextColor(1, 0.5, 0);
 				end
-				if (arg9 == 63167) then
+				if (spellId == 63167) then
 					ZoneTextString:SetTextColor(1, 0.5, 0);
 				end
 			PVPInfoTextString:SetText("");
@@ -57,19 +51,19 @@ end
 
 
 
--- Shadow Trance or BackSlash
-if (arg2 == "SPELL_AURA_APPLIED") then
-	if bit.band(arg8, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then
-		if (arg9 == 17941) or (arg9 == 34936) then
+-- Shadow Trance or BackLash
+if (eventType == "SPELL_AURA_APPLIED") then
+	if band(destFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then
+		if (spellId == 17941) or (spellId == 34936) then
 			ZoneTextString:SetText("Shadow Bolt!");
 			ZoneTextFrame.startTime = GetTime()
 			ZoneTextFrame.fadeInTime = 0
 			ZoneTextFrame.holdTime = 1
 			ZoneTextFrame.fadeOutTime = 2
-			if (arg9 == 17941) then
+			if (spellId == 17941) then
 				ZoneTextString:SetTextColor(1, 0, 1);
 			end
-			if (arg9 == 34936) then
+			if (spellId == 34936) then
 				ZoneTextString:SetTextColor(1, 0.5, 0);
 			end
 			PVPInfoTextString:SetText("");
@@ -83,10 +77,10 @@ end
 
 
 ------------------------------------------------------------- Hostile Spells -------------------------------------------------------------
-if (arg2 == "SPELL_CAST_SUCCESS") then
-	if bit.band(arg5, COMBATLOG_OBJECT_REACTION_HOSTILE) > 0 then -- Makes sure it's an enemy player
-		if (arg9 == 31224) or (arg9 == 642) or (arg9 == 47891) or (arg9 == 47585) or (arg9 == 23920) or (arg9 == 48707) or (arg9 == 45438) or (arg9 == 49039) or (arg9 == 12292) or (arg9 == 18499) or (arg9 == 59672) or (arg9 == 31687) or (arg9 == 48066) or (arg9 == 34692) or (arg9 == 6346) or (arg9 == 19263) then -- Make sure Shadow Ward and Nether prot use this same event?
-			SpellName = arg10
+if (eventType == "SPELL_CAST_SUCCESS") then
+	if band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) > 0 then -- Makes sure it's an enemy player
+		if (spellId == 31224) or (spellId == 642) or (spellId == 47891) or (spellId == 47585) or (spellId == 23920) or (spellId == 48707) or (spellId == 45438) or (spellId == 49039) or (spellId == 12292) or (spellId == 18499) or (spellId == 59672) or (spellId == 31687) or (spellId == 48066) or (spellId == 34692) or (spellId == 6346) or (spellId == 19263) then -- Make sure Shadow Ward and Nether prot use this same event?
+			SpellName = spellName
 			ZoneTextString:SetText(""..SpellName.." up!");
 			ZoneTextFrame.startTime = GetTime()
 			ZoneTextFrame.fadeInTime = 0
@@ -96,17 +90,17 @@ if (arg2 == "SPELL_CAST_SUCCESS") then
 			PVPInfoTextString:SetText("");
 			ZoneTextFrame:Show()
 			PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\pulse.wav");
-			if (arg9 == 23920) then
+			if (spellId == 23920) then
 				MySpellReflected = false;
 			end
 		end
 	end
 end
 
-if (arg2 == "SPELL_AURA_REMOVED") then
-	if bit.band(arg8, COMBATLOG_OBJECT_REACTION_HOSTILE) > 0 then
-		if (arg9 == 31224) or (arg9 == 642) or (arg9 == 47891) or (arg9 == 47585) or (arg9 == 23920) or (arg9 == 48707) or (arg9 == 45438) or (arg9 == 49039) or (arg9 == 12292) or (arg9 == 18499) or (arg9 == 59672) or (arg9 == 31687) or (arg9 == 48066) or (arg9 == 34692) or (arg9 == 6346) then
-			SpellName = arg10
+if (eventType == "SPELL_AURA_REMOVED") then
+	if band(destFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) > 0 then
+		if (spellId == 31224) or (spellId == 642) or (spellId == 47891) or (spellId == 47585) or (spellId == 23920) or (spellId == 48707) or (spellId == 45438) or (spellId == 49039) or (spellId == 12292) or (spellId == 18499) or (spellId == 59672) or (spellId == 31687) or (spellId == 48066) or (spellId == 34692) or (spellId == 6346) then
+			SpellName = spellName
 			ZoneTextString:SetText(""..SpellName.." down.");
 			ZoneTextFrame.startTime = GetTime()
 			ZoneTextFrame.fadeInTime = 0
@@ -119,11 +113,11 @@ if (arg2 == "SPELL_AURA_REMOVED") then
 	end
 end
 
-if (arg2 == "SPELL_AURA_REMOVED") then -- apply same filtering on reflecting for Shadow Ward, and for /deflect?
-	if bit.band(arg8, COMBATLOG_OBJECT_REACTION_HOSTILE) > 0 then
-		if (arg9 == 23920) then
+if (eventType == "SPELL_AURA_REMOVED") then -- apply same filtering on reflecting for Shadow Ward, and for /deflect?
+	if band(destFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) > 0 then
+		if (spellId == 23920) then
 			if (not MySpellReflected) then
-				SpellName = arg10
+				SpellName = spellName
 				ZoneTextString:SetText(""..SpellName.." down.");
 				ZoneTextFrame.startTime = GetTime()
 				ZoneTextFrame.fadeInTime = 0
@@ -140,8 +134,9 @@ end
 
 
 ------------------------------------------------------------- Other ----------------------------------------------------------------------
-if (arg2 == "SPELL_AURA_DISPELLED") or (arg2 == "SPELL_AURA_STOLEN") then
-	if bit.band(arg8, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then -- Makes sure it's my buff only
+if (eventType == "SPELL_AURA_DISPELLED") or (event == "SPELL_AURA_STOLEN") then
+	if band(destFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then -- Makes sure it's my buff only
+		local arg12=select(12,...)
 		if (arg12 == 47893) or (arg12 == 47889) then
 			SpellName = arg13
 			ZoneTextString:SetText(""..SpellName.." removed.");
@@ -158,11 +153,11 @@ if (arg2 == "SPELL_AURA_DISPELLED") or (arg2 == "SPELL_AURA_STOLEN") then
 	end
 end
 
-if (arg2 == "SPELL_AURA_REMOVED") then
-	if bit.band(arg8, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then -- Makes sure it's my buff only
-		if (arg9 == 47893) or (arg9 == 47889) or (arg9 == 19028) then
+if (eventType == "SPELL_AURA_REMOVED") then
+	if band(destFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then -- Makes sure it's my buff only
+		if (spellId == 28176) or (spellId == 687) then
 			if (WarlockArmorActive) then -- makes sure buff is still active as to not spam twice when dispelled, since it shows both dispelled and removed events, but the removed event .5sec slower
-				SpellName = arg10
+				SpellName = spellName
 				ZoneTextString:SetText(""..SpellName.." removed.");
 				ZoneTextFrame.startTime = GetTime()
 				ZoneTextFrame.fadeInTime = 0
@@ -178,9 +173,9 @@ if (arg2 == "SPELL_AURA_REMOVED") then
 	end
 end
 
-if (arg2 == "SPELL_CAST_SUCCESS") then
-	if bit.band(arg5, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then
-		if (arg9 == 47893) or (arg9 == 47889) then
+if (eventType == "SPELL_CAST_SUCCESS") then
+	if band(sourceFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then
+		if (spellId == 28176) or (spellId == 687) then
 			WarlockArmorActive = true;
 		end
 	end
@@ -189,11 +184,12 @@ end
 
 
 ------------------------------------------------------------- Resists --------------------------------------------------------------------
-if (arg2 == "SPELL_MISSED") then -- need to add: evade, deflect (what is this?), check what happens when debuff is on an evading mob, dont want spam for each dot tick, even tho most evades remove all debuffs on them, not all
-	if bit.band(arg5, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then -- Makes sure it's my own spell or my pet's spell
-		if (arg9 == 47860) or (arg9 == 5138) or (arg9 == 47857) or (arg9 == 47813) or (arg9 == 47864) or (arg9 == 11719) or (arg9 == 6215) or (arg9 == 47811) or (arg9 == 50511) or (arg9 == 47862) or (arg9 == 47843) or (arg9 == 18223) or (arg9 == 47865) or (arg9 == 18647) or (arg9 == 19647) or (arg9 == 6358) then
-			SpellName = arg10
-			if (arg7 == "Grounding Totem") or (arg7 == "Тотем заземления") then
+if (eventType == "SPELL_MISSED") then -- need to add: evade, deflect (what is this?), check what happens when debuff is on an evading mob, dont want spam for each dot tick, even tho most evades remove all debuffs on them, not all
+	if band(sourceFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then -- Makes sure it's my own spell or my pet's spell
+		if (spellId == 47860) or (spellId == 5138) or (spellId == 47857) or (spellId == 47813) or (spellId == 47864) or (spellId == 11719) or (spellId == 6215) or (spellId == 47811) or (spellId == 50511) or (spellId == 47862) or (spellId == 47843) or (spellId == 18223) or (spellId == 47865) or (spellId == 18647) or (spellId == 19647) or (spellId == 6358) then
+			local arg12=select(12,...)
+			SpellName = spellName
+			if (destName == "Grounding Totem") or (destName == "Тотем заземления") then
 				ResistMethod = "Grounded"
 			elseif (arg12 == "REFLECT") then
 				ResistMethod = "reflected"
@@ -223,3 +219,13 @@ end
 
 
 end
+
+
+local f=CreateFrame"Frame"
+f:SetScript("OnEvent",LockNotes_OnEvent)
+
+
+local WarlockArmorActive = true;
+local MySpellReflected = false;
+f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+
