@@ -3,7 +3,7 @@
 LockNotes by affli @ RU-Howling Fjord
 All rights reserved.
 Thanks Veev-Medivh for original LockNotes, 90% of your core still works) thanks Urgess for some code and ideas.
-
+Big thanks to mihima for spellid ideas.
 ]]--
 
 local band=bit.band
