@@ -29,7 +29,7 @@ if (eventType == "SPELL_CAST_SUCCESS") then
 			ZoneTextString:SetTextColor(0, 1, 0);
 			PVPInfoTextString:SetText("");
 			ZoneTextFrame:Show()
-			PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\cling.wav");
+			PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\cling.mp3");
 		end
 	end
 end
@@ -55,7 +55,7 @@ if (eventType == "SPELL_AURA_APPLIED") then
 				end
 			PVPInfoTextString:SetText("");
 			ZoneTextFrame:Show()
-			PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\bell.wav");
+			PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\bell.mp3");
 		end
 	end
 end
@@ -77,7 +77,7 @@ if (eventType == "SPELL_AURA_APPLIED") then
 			end
 			PVPInfoTextString:SetText("");
 			ZoneTextFrame:Show()
-			PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\ding.wav");
+			PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\ding.mp3");
 		end
 	end
 end
@@ -115,7 +115,7 @@ if (eventType == "SPELL_CAST_SUCCESS") then
 			ZoneTextString:SetTextColor(1, 0, 0);
 			PVPInfoTextString:SetText("");
 			ZoneTextFrame:Show()
-			PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\pulse.wav");
+			PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\pulse.mp3");
 			if (spellId == 23920) then
 				MySpellReflected = false;
 			end
@@ -190,7 +190,7 @@ if (eventType == "SPELL_AURA_REMOVED") then
 				ZoneTextString:SetTextColor(1, 0, 0);
 				PVPInfoTextString:SetText("");
 				ZoneTextFrame:Show()
-				PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\buzz.wav");
+				PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\buzz.mp3");
 				WarlockArmorActive = false;
 			end
 		end
@@ -252,7 +252,7 @@ if (eventType == "SPELL_MISSED") then -- need to add: evade, deflect (what is th
 				PVPInfoTextString:SetText("");
 				ZoneTextFrame:Show()
 					if (ResistMethod ~= "failed") then -- only play sound file when you need to instantly recast what you just casted
-						PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\thud.wav");
+						PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\thud.mp3");
 					end
 			end	
 		end
