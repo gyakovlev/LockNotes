@@ -1,3 +1,11 @@
+--[[
+
+LockNotes by affli @ RU-Howling Fjord
+All rights reserved.
+Thanks Veev-Medivh for original LockNotes, 90% of your core still works) thanks Urgess for some code and ideas.
+
+]]--
+
 local band=bit.band
 local function LockNotes_OnEvent(self,event,...)
 
@@ -5,10 +13,13 @@ local timestamp, eventType, sourceGUID, sourceName, sourceFlags, destGUID, destN
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------- Friendly Buffs -------------------------------------------------------------
---Hand of Protection or Hand Of Freedom or Hand of Salvation or Power Infusion
 if (eventType == "SPELL_CAST_SUCCESS") then
 	if band(destFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then
-		if (spellId == 1022) or (spellId == 1044) or (spellId == 1038) or (spellID == 10060) then
+		if (spellId == 1022) --Hand of Protection
+		or (spellId == 1044) -- Hand Of Freedom
+		or (spellId == 1038) --Hand of Salvation
+		or (spellID == 10060) --Power Infusion
+		then
 			SpellName = spellName
 			ZoneTextString:SetText(""..SpellName.." up.");
 			ZoneTextFrame.startTime = GetTime()
@@ -23,10 +34,14 @@ if (eventType == "SPELL_CAST_SUCCESS") then
 	end
 end
 
---Eradication, Molten Core, Decimation
+------------------------------------------------------------- Procs -------------------------------------------------------------
 if (eventType == "SPELL_AURA_APPLIED") then
 	if band(destFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then
-		if (spellId == 64371) or (spellId == 71165) or (spellId == 63167) then
+		if (spellId == 64371) --Eradication
+		or (spellId == 71165) --Molten Core
+		or (spellId == 63167) --Decimation
+		or (spellId == 85114) --Improved Soul Fire
+		then
 			SpellName = spellName
 			ZoneTextString:SetText(""..SpellName.." up!");
 			ZoneTextFrame.startTime = GetTime()
@@ -35,11 +50,7 @@ if (eventType == "SPELL_AURA_APPLIED") then
 			ZoneTextFrame.fadeOutTime = 2
 				if (spellId == 64371) then
 					ZoneTextString:SetTextColor(0, 1, 0);
-				end
-				if (spellId == 71165) then
-					ZoneTextString:SetTextColor(1, 0.5, 0);
-				end
-				if (spellId == 63167) then
+				else
 					ZoneTextString:SetTextColor(1, 0.5, 0);
 				end
 			PVPInfoTextString:SetText("");
@@ -130,7 +141,7 @@ if (eventType == "SPELL_AURA_REMOVED") then
 		or (spellId == 19263) --Deterrence
 --		or (spellId == 48066) --Old Power Word: Shield
 --		or (spellId == 47891) --Old Shadow Ward?
-		then -- Make sure Shadow Ward and Nether prot use this same event?	
+		then
 			SpellName = spellName
 			ZoneTextString:SetText(""..SpellName.." down.");
 			ZoneTextFrame.startTime = GetTime()
@@ -144,7 +155,7 @@ if (eventType == "SPELL_AURA_REMOVED") then
 	end
 end
 
-if (eventType == "SPELL_AURA_REMOVED") then -- apply same filtering on reflecting for Shadow Ward, and for /deflect?
+if (eventType == "SPELL_AURA_REMOVED") then
 	if band(destFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) > 0 then
 		if (spellId == 23920) -- Spell Reflect
 			then
@@ -209,7 +220,7 @@ if (eventType == "SPELL_MISSED") then -- need to add: evade, deflect (what is th
 		or (spellId == 5782)  --Fear
 		or (spellId == 348)   --Immolate
 --		or (spellId == 50511) --Old Shadow Embrace? o_O
---		or (spellId == 47862) --Old Syphon Life?
+--		or (spellId == 47862) --Old Siphon Life?
 		or (spellId == 30108) --Unstable Affliction
 		or (spellId == 18223) --Curse of Exhaustion
 		or (spellId == 1490)  --Curse of the Elements

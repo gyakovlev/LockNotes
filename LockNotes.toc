@@ -2,9 +2,9 @@
 ## Name: LockNotes
 ## Title: |c939482c9Lock|rNotes
 ## Notes: Simple spell notifications tailored for the warlock class.
-## Version: 3.3a
-## Author: Veev-Medivh
-## Updated by: Urgess, Affli@HowlingFjord-eu(RU)
+## Version: 4.0.1a
+## Author: Affli@HowlingFjord-eu(RU)
+## Additional author: Urgess
+## Original author: Veev-Medivh
 
 LockNotes.lua
-
