@@ -5,6 +5,6 @@
 ## Version: 3.3a
 ## Author: Veev-Medivh
 ## Updated by: Urgess, Affli@HowlingFjord-eu(RU)
-LockNotes.xml
+
 LockNotes.lua
 
