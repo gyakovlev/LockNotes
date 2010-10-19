@@ -42,6 +42,7 @@ if (eventType == "SPELL_AURA_APPLIED") then
 		or (spellId == 63167) --Decimation
 		or (spellId == 85114) --Improved Soul Fire
 		or (spellId == 47283) --Empowered Imp
+		or (spellId == 88447) --Demonic rebirth
 		then
 			SpellName = spellName
 			ZoneTextString:SetText(""..SpellName.." up!");
