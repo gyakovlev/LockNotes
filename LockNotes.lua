@@ -6,6 +6,8 @@ Thanks Veev-Medivh for original LockNotes, 90% of your core still works) thanks 
 Big thanks to mihima for spellid ideas.
 ]]--
 
+local WarlockArmorActive = true
+local MySpellReflected = false
 local band=bit.band
 local function LockNotes_OnEvent(self,event,...)
 
@@ -18,7 +20,7 @@ if (eventType == "SPELL_CAST_SUCCESS") then
 		if (spellId == 1022) --Hand of Protection
 		or (spellId == 1044) -- Hand Of Freedom
 		or (spellId == 1038) --Hand of Salvation
-		or (spellID == 10060) --Power Infusion
+		or (spellId == 10060) --Power Infusion
 		then
 			SpellName = spellName
 			ZoneTextString:SetText(""..SpellName.." up.");
@@ -257,7 +259,7 @@ if (eventType == "SPELL_MISSED") then -- need to add: evade, deflect (what is th
 					if (ResistMethod ~= "failed") then -- only play sound file when you need to instantly recast what you just casted
 						PlaySoundFile("Interface\\AddOns\\LockNotes\\Sounds\\thud.mp3");
 					end
-			end	
+			end
 		end
 	end
 end
@@ -269,10 +271,4 @@ end
 
 local f=CreateFrame"Frame"
 f:SetScript("OnEvent",LockNotes_OnEvent)
-
-
-local WarlockArmorActive = true;
-local MySpellReflected = false;
 f:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-
-
