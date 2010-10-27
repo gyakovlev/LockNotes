@@ -141,6 +141,7 @@ if (eventType == "SPELL_AURA_REMOVED") then
 		or (spellId == 34692) --The Beast Within
 		or (spellId == 6346)  --Fear Ward
 		or (spellId == 19263) --Deterrence
+		or (spellId == 871)   --Shield Wall
 --		or (spellId == 48066) --Old Power Word: Shield
 --		or (spellId == 47891) --Old Shadow Ward?
 		then
