@@ -3,7 +3,7 @@
 LockNotes by affli @ RU-Howling Fjord
 All rights reserved.
 Thanks Veev-Medivh for original LockNotes, 90% of your core still works) thanks Urgess for some code and ideas.
-Big thanks to mihima for spellid ideas.
+Big thanks to mihma for spellid ideas.
 ]]--
 
 local WarlockArmorActive = true
@@ -44,7 +44,7 @@ if (eventType == "SPELL_AURA_APPLIED") then
 		or (spellId == 63167) --Decimation
 		or (spellId == 85114) --Improved Soul Fire
 		or (spellId == 47283) --Empowered Imp
-		or (spellId == 88447) --Demonic rebirth
+		or (spellId == 88448) --Demonic rebirth
 		then
 			SpellName = spellName
 			ZoneTextString:SetText(""..SpellName.." up!");
@@ -143,6 +143,8 @@ if (eventType == "SPELL_AURA_REMOVED") then
 		or (spellId == 34692) --The Beast Within
 		or (spellId == 6346)  --Fear Ward
 		or (spellId == 19263) --Deterrence
+		or (spellId == 33206) --Pain Suppression
+		or (spellId == 48505) --Starfall
 		or (spellId == 871)   --Shield Wall
 --		or (spellId == 48066) --Old Power Word: Shield
 --		or (spellId == 47891) --Old Shadow Ward?
