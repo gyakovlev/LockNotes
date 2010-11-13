@@ -107,6 +107,9 @@ if (eventType == "SPELL_CAST_SUCCESS") then
 		or (spellId == 33206) --Pain Suppression
 		or (spellId == 48505) --Starfall
 		or (spellId == 871)   --Shield Wall
+		or (spellId == 48792) --Icebound Fortitude
+		or (spellId == 50334) --Berserk
+		
 --		or (spellId == 48066) --Old Power Word: Shield
 --		or (spellId == 47891) --Old Shadow Ward?
 		then -- Make sure Shadow Ward and Nether prot use this same event?
@@ -146,6 +149,8 @@ if (eventType == "SPELL_AURA_REMOVED") then
 		or (spellId == 33206) --Pain Suppression
 		or (spellId == 48505) --Starfall
 		or (spellId == 871)   --Shield Wall
+		or (spellId == 48792) --Icebound Fortitude
+		or (spellId == 50334) --Berserk
 --		or (spellId == 48066) --Old Power Word: Shield
 --		or (spellId == 47891) --Old Shadow Ward?
 		then
